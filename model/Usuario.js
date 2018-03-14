@@ -12,7 +12,9 @@ class Usuario {
   static getUsuarioPorId(id, callback){
     var con = pool.getConnection(function(err, connection) {
       if (err) {
+throw err;
         connection.release();
+
         res.json({ "code": 100, "status": "Error in connection database" });
         return;
       }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/css/uikit.min.css" />
+
+<!-- UIkit JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit.min.js"></script>
+</head>
+<body>
+
+<div class="uk-container">
+  <ul uk-tab class="uk-padding">
+      <li class="uk-active"><a href="#">Agenda</a></li>
+      <li><a href="#">Clientes</a></li>
+      <li class="uk-disabled"><a>Referidos</a></li>
+  </ul>
+<button class="uk-button uk-button-primary uk-margin-small-right" type="button" uk-toggle="target: #modal-cita">agendar nueva cita</button>
+
+
+  <table class="uk-table uk-table-small uk-table-striped">
+     <tbody>
+        <tr>
+            <td>Señor Hipotético</td>
+            <td>Marzo 21, 7:00 PM</td>
+            <td>16 Oriente 420, Puebla</td>
+        </tr>
+        <tr>
+            <td>Señora Prueba</td>
+            <td>Marzo 22, 11:00 AM</td>
+            <td>3 Poniente 101, San Pedro Cholula</td>
+        </tr>
+      <!--
+        <tr>
+            <td>$titulo</td>
+            <td>$datetime</td>
+            <td>$ubicacion</td>
+        </tr>
+      -->
+    </tbody>
+</table>
+
+</div>
+
+<div id="modal-cita" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <form>
+      <fieldset class="uk-fieldset">
+        <legend class="uk-legend">Nueva cita</legend>
+        <div class="uk-margin">
+          <input class="uk-input" type="text" placeholder="Nombre">
+        </div>
+        <div class="uk-margin">
+          <input class="uk-input" type="text" placeholder="Teléfono">
+        </div>
+        <div class="uk-margin">
+          <input class="uk-input" type="text" placeholder="AAAA-MM-DD HH:MM">
+        </div>
+        <div class="uk-margin">
+          <input class="uk-input" type="text" placeholder="Input">
+        </div>
+        <div class="uk-margin">
+          <textarea class="uk-textarea" rows="4" placeholder="Textarea"></textarea>
+        </div>
+      </fieldset>
+    </form>
+
+    <button class="uk-button uk-button-primary" type="button">Guardar</button>
+
+  </div>
+</div>
+
+</body>
+</html>
