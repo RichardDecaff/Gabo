@@ -7,6 +7,9 @@
 
 <!-- UIkit JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit.min.js"></script>
+
+<!-- Jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -20,17 +23,7 @@
 
 
   <table class="uk-table uk-table-small uk-table-striped">
-     <tbody>
-        <tr>
-            <td>Señor Hipotético</td>
-            <td>Marzo 21, 7:00 PM</td>
-            <td>16 Oriente 420, Puebla</td>
-        </tr>
-        <tr>
-            <td>Señora Prueba</td>
-            <td>Marzo 22, 11:00 AM</td>
-            <td>3 Poniente 101, San Pedro Cholula</td>
-        </tr>
+     <tbody id="tbl_citas">
       <!--
         <tr>
             <td>$titulo</td>
@@ -45,31 +38,69 @@
 
 <div id="modal-cita" uk-modal>
   <div class="uk-modal-dialog uk-modal-body">
-    <form>
+    <form id="frm_cita">
       <fieldset class="uk-fieldset">
         <legend class="uk-legend">Nueva cita</legend>
         <div class="uk-margin">
-          <input class="uk-input" type="text" placeholder="Nombre">
+          <input class="uk-input" id="nombre" type="text" placeholder="Nombre" name="nombre">
         </div>
         <div class="uk-margin">
-          <input class="uk-input" type="text" placeholder="Teléfono">
+          <input class="uk-input" type="text" placeholder="Teléfono" name="telefono">
         </div>
         <div class="uk-margin">
-          <input class="uk-input" type="text" placeholder="AAAA-MM-DD HH:MM">
+          <input class="uk-input" type="text" placeholder="AAAA-MM-DD HH:MM" id="fecha_creada">
         </div>
         <div class="uk-margin">
-          <input class="uk-input" type="text" placeholder="Input">
+          <input class="uk-input" type="text" placeholder="Direccion" id="ubicacion">
         </div>
         <div class="uk-margin">
-          <textarea class="uk-textarea" rows="4" placeholder="Textarea"></textarea>
+          <textarea class="uk-textarea" rows="4" placeholder="Notas" id="notas"></textarea>
         </div>
       </fieldset>
     </form>
+    <button class="uk-button uk-button-primary" onclick="SubForm()">Guardar</button>
 
-    <button class="uk-button uk-button-primary" type="button">Guardar</button>
 
   </div>
 </div>
 
 </body>
 </html>
+<script>
+
+function llenarCitas(){
+  $.ajax({url: "http://localhost:8080/Agendas", success: function(result){
+    $("#tbl_citas").empty();
+    result.forEach(element =>{$("#tbl_citas").append("<tr><td>"+element.titulo+"</td><td>"+element.fecha_creada+"</td><td>"+element.ubicacion+"</td></tr>");});
+  }});
+}
+
+llenarCitas();
+
+function SubForm (){
+  console.log($('#frm_cita').serialize());
+    $.ajax({
+        url:'http://localhost:8080/Clientes',
+        type:'post',
+        data:$('#frm_cita').serialize(),
+        success:function(id){
+          $.ajax({
+              url:'http://localhost:8080/Clientes/'+id.insertId,
+              type:'get',
+              success:function(cliente){
+                var agenda = {"titulo":cliente[0].nombre, "notas":$("#notas").val(), "fecha_creada":$("#fecha_creada").val(), "ubicacion":$("#ubicacion").val(), "cliente_id":cliente[0].cliente_id};
+                $.ajax({
+                    url:'http://localhost:8080/Agendas',
+                    type:'post',
+                    data:agenda,
+                    success:function(data){
+                      llenarCitas();
+                        console.log(data);
+                    }
+                });
+              }
+          });
+        }
+    });
+}
+</script>
