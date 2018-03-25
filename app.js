@@ -29,6 +29,8 @@ app.route('/Usuarios/:tagId')
   res.send('Put de Test');
 });
 
+app.use(express.static('./views'))
+
 app.route('/Clientes/:tagId')
 .get(function(req, res) {
   Cliente.getClientePorId(req.params.tagId, function(error, data){
@@ -70,7 +72,7 @@ app.route('/Clientes')
 app.route('/')
 .get(function(req, res) {
   fs.readFile('./views/agenda.html', 'utf-8', function(err, data) {
-    res.writeHead(200, {'Content-Type': 'text/html charset=utf-8'});
+    res.writeHead(200, {'Content-Type': 'text/html'});
     var temp = "test";
     var renderedHtml = ejs.render(data, {temp: temp});
     res.end(renderedHtml);
