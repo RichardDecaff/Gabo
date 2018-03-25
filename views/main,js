@@ -1,0 +1,4 @@
+function(){console.log("ya cargó");}
+//mientras no logre que cargue main.js los scrips estarán al final de main.html
+
+//TODO poner aquí scripts

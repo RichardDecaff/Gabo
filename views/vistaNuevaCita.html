@@ -1,0 +1,25 @@
+<form id="frm_cita">
+  <fieldset class="uk-fieldset">
+    <legend class="uk-legend">Nueva cita</legend>
+    <div class="uk-margin">
+      <input class="uk-input" id="nombre" type="text" placeholder="Nombre" name="nombre">
+    </div>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Teléfono" name="telefono">
+    </div>
+    <div class="uk-margin">
+      <script>
+        $( function() {
+          $( "#fecha_creada" ).datepicker();
+        } );
+      </script>
+      <input class="uk-input" type="text" placeholder="Fecha" id="fecha_creada">
+    </div>
+    <div class="uk-margin">
+      <input class="uk-input" type="text" placeholder="Direccion" id="ubicacion">
+    </div>
+    <div class="uk-margin">
+      <textarea class="uk-textarea" rows="4" placeholder="Notas" id="notas"></textarea>
+    </div>
+</fieldset>
+</form>

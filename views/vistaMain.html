@@ -1,0 +1,86 @@
+<div class="uk-container">
+
+  <!-- Menú interno (pestañas) -->
+  <ul id="menuPestanas" uk-tab uk-switcher="animation: uk-animation-fade" class="uk-padding">
+      <li id="tab_Agenda" class="uk-active"><a href="#">Agenda</a></li>
+      <li id="tab_Flujo"><a href="#">Flujo de ventas</a></li>
+      <!-- Si hubiera otra pestana, necesita tener su div en uk-switcher-->
+  </ul> <!-- /pestañas -->
+
+  <ul class="uk-switcher"><!-- contenedor para los paneles -->
+
+    <div id="panelAgenda">
+      <table class="uk-table uk-table-small uk-table-striped">
+        <thead>
+          <tr> <!-- este renglón contiene el botón de agregar -->
+              <td><button class="uk-button uk-button-small">
+                Agendar demostración</button></td>
+              <td></td>
+              <td></td>
+          </tr><!-- /renglonAgregar -->
+        </thead>
+        <tbody id="tbl_citas">
+            <!-- <tr> -->
+            <!-- <tr> -->
+        </tbody>
+      </table>
+    </div><!-- /agenda -->
+
+    <div id="panelFlujo">
+      <table class="uk-table uk-table-small uk-table-striped">
+        <tbody id="tbl_flujo">
+          <tr>
+            <td>Nombre</td>
+            <td>Status</td>
+          </tr>
+          <tr>
+            <td>Nombre</td>
+            <td>Status</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </ul><!-- /contenedorPaneles -->
+
+</div><!-- /container -->
+
+<script>
+
+function llenarCitas(){
+  $.ajax({url: "http://localhost:8080/Agendas", success: function(result){
+    $("#tbl_citas").empty();
+    result.forEach(element =>{$("#tbl_citas").append("<tr><td>"+element.titulo+"</td><td>"+element.fecha_creada+"</td><td>"+element.ubicacion+"</td></tr>");});
+  }});
+}
+
+llenarCitas();
+
+function SubForm (){
+  console.log($('#frm_cita').serialize());
+    $.ajax({
+        url:'http://localhost:8080/Clientes',
+        type:'post',
+        data:$('#frm_cita').serialize(),
+        success:function(id){
+          $.ajax({
+              url:'http://localhost:8080/Clientes/'+id.insertId,
+              type:'get',
+              success:function(cliente){
+                var agenda = {"titulo":cliente[0].nombre, "notas":$("#notas").val(), "fecha_creada":$("#fecha_creada").val(), "ubicacion":$("#ubicacion").val(), "cliente_id":cliente[0].cliente_id};
+                $.ajax({
+                    url:'http://localhost:8080/Agendas',
+                    type:'post',
+                    data:agenda,
+                    success:function(data){
+                      llenarCitas();
+                        console.log(data);
+                    }
+                });
+              }
+          });
+        }
+    });
+    $('#frm_cita').trigger("reset");
+}
+</script>
