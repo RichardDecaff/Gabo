@@ -34,8 +34,8 @@
             </div>
 
             <div class="uk-navbar-right">
-              <button id="botonRegresar" class="uk-button uk-button-secondary" style="visibility: hidden"
-              onclick="vistaMain();">Regresar</button>
+              <a href="" id="botonRegresar" class="uk-icon-button" uk-icon="close" style="visibility: hidden"
+              onclick="vistaMain();"></a>
               <a id="botonMenu" class="uk-navbar-toggle" uk-navbar-toggle-icon href="#offcanvas" uk-toggle></a>
             </div>
 
@@ -52,13 +52,13 @@
                   <!-- algo asi como condicional en EJS -->
                   <ul class="uk-nav uk-nav-default uk-nav uk-margin-top">
                       <li class="uk-nav-header">Administrar</li>
-                      <li><a href="#">Usuarios</a></li>
+                      <li><a href="#" onclick="vistaAux('Gestión de Usuarios', 'adminUsuarios')">Usuarios</a></li>
                       <li><a href="#">Capacitación</a></li>
                       <li><a href="#" onclick="vistaAux('test', 'vistaNuevaCita');">Test</a></li>
                   </ul><!-- /nivel>1 -->
 
                   <ul class="uk-nav uk-nav-default uk-nav">
-                      <li class="uk-nav-header">USERNAME</li>
+                      <li class="uk-nav-header">$USERNAME</li>
                       <li><a href="#">Salir</a></li>
                   </ul>
 
