@@ -74,31 +74,4 @@ function llenarCitas(){
 
 llenarCitas();
 
-function SubForm (){
-  console.log($('#frm_cita').serialize());
-    $.ajax({
-        url:'http://localhost:8080/Clientes',
-        type:'post',
-        data:$('#frm_cita').serialize(),
-        success:function(id){
-          $.ajax({
-              url:'http://localhost:8080/Clientes/'+id.insertId,
-              type:'get',
-              success:function(cliente){
-                var agenda = {"titulo":cliente[0].nombre, "notas":$("#notas").val(), "fecha_creada":$("#fecha_creada").val(), "ubicacion":$("#ubicacion").val(), "cliente_id":cliente[0].cliente_id};
-                $.ajax({
-                    url:'http://localhost:8080/Agendas',
-                    type:'post',
-                    data:agenda,
-                    success:function(data){
-                      llenarCitas();
-                        console.log(data);
-                    }
-                });
-              }
-          });
-        }
-    });
-    $('#frm_cita').trigger("reset");
-}
 </script>
