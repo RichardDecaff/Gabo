@@ -13,8 +13,18 @@
       <table class="uk-table uk-table-small uk-table-striped">
         <thead>
           <tr> <!-- este renglón contiene el botón de agregar -->
-              <td><button class="uk-button uk-button-small">
-                Agendar demostración</button></td>
+              <td><button class="uk-button uk-button-small"
+                onclick="vistaAux('Crear Cita','vistaNuevaCita')">
+                Crear cita...</button>
+              <!-- <div uk-dropdown="mode: click">
+                <ul class="uk-nav uk-dropdown-nav">
+                  <li><a href="#">Demostración</a></li>
+                  <li class="uk-nav-divider"></li>
+                  <li><a href="#">Pago</a></li>
+                  <li><a href="#">Entrega</a></li>
+                  <li><a href="#">Seguimiento</a></li>
+                </ul>
+              </div> --></td>
               <td></td>
               <td></td>
           </tr><!-- /renglonAgregar -->
@@ -29,8 +39,16 @@
     <div id="panelFlujo">
       <table class="uk-table uk-table-small uk-table-striped">
         <tbody id="tbl_flujo">
+          <thead>
+            <tr>
+              <th class="uk-table-expand">Nombre</th>
+              <th>último evento</th>
+              <th></th>
+            </tr>
+          </thead>
           <tr>
             <td>Nombre</td>
+            <!-- TODO Nombre será link que lleve a detalleCliente.html y cargue detalles correspondientes -->
             <td>Status</td>
           </tr>
           <tr>

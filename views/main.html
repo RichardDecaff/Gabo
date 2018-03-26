@@ -7,6 +7,7 @@
 
   <!-- UIkit JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.40/js/uikit-icons.min.js"></script>
 
   <!-- Jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -29,12 +30,12 @@
           <nav class="uk-navbar">
 
             <div class="uk-navbar-left">
-                <a href="#" id="titulo" class="uk-navbar-item uk-logo">CRM28</a>
+                <a href="#" id="titulo" class="uk-navbar-item uk-logo"></a>
             </div>
 
             <div class="uk-navbar-right">
-              <button id="botonRegresar" class="uk-button uk-button-secondary" style="visibility: hidden">
-                Regresar</button>
+              <button id="botonRegresar" class="uk-button uk-button-secondary" style="visibility: hidden"
+              onclick="vistaMain();">Regresar</button>
               <a id="botonMenu" class="uk-navbar-toggle" uk-navbar-toggle-icon href="#offcanvas" uk-toggle></a>
             </div>
 
@@ -48,15 +49,16 @@
               <div class="uk-panel">
 
                   <!-- Solo para nivel > 1 -->
-                  <ul class="uk-nav uk-nav-default uk-nav uk-margin-top" v-for="(pages, category, index) in navigation">
+                  <!-- algo asi como condicional en EJS -->
+                  <ul class="uk-nav uk-nav-default uk-nav uk-margin-top">
                       <li class="uk-nav-header">Administrar</li>
                       <li><a href="#">Usuarios</a></li>
                       <li><a href="#">Capacitación</a></li>
-                      <li><a href="#">Test vistaAux</a></li>
+                      <li><a href="#" onclick="vistaAux('test', 'vistaNuevaCita');">Test</a></li>
                   </ul><!-- /nivel>1 -->
 
                   <ul class="uk-nav uk-nav-default uk-nav">
-                      <li class="uk-nav-header"><%USERNAME%></li>
+                      <li class="uk-nav-header">USERNAME</li>
                       <li><a href="#">Salir</a></li>
                   </ul>
 
@@ -70,8 +72,8 @@
 
   </div><!-- /app -->
 
-</body>
+  <script type="text/javascript">
+    $(document).ready(vistaMain());
+  </script>
 
-<script>
-  $('#app').load('vistaMain.html');
-</script>
+</body>
